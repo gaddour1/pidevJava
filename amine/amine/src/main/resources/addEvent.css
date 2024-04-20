@@ -1,0 +1,76 @@
+/* Overall layout styles */
+.main-pane {
+    -fx-background-color: #f0f0f0;
+}
+
+/* Sidebar styles */
+.sidebar {
+    -fx-background-color: #0050a7;
+    -fx-pref-width: 200px;
+}
+
+.user-section {
+    -fx-padding: 20px;
+    -fx-alignment: center;
+}
+
+.user-name {
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.menu-item {
+    -fx-background-color: transparent;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+}
+
+.menu-item:hover {
+    -fx-background-color: #1E90FF;
+}
+
+/* Main content area styles */
+.content-area {
+    -fx-padding: 20px;
+}
+
+.action-button {
+    -fx-background-color: #4CAF50;
+    -fx-text-fill: white;
+    -fx-font-size: 14px;
+    -fx-pref-width: 80px;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.action-button:hover {
+    -fx-background-color: #388E3C;
+}
+
+.delete-button {
+    -fx-background-color: #F44336;
+}
+
+.modify-button {
+    -fx-background-color: #2196F3;
+}
+
+.text-field, .text-area {
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #a0a0a0;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3px;
+}
+
+.list-view {
+    -fx-background-color: white;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3px;
+}
+
+.date-picker {
+    -fx-background-color: white;
+    -fx-prompt-text-fill: #a0a0a0;
+    -fx-border-color: #bdc3c7;
+    -fx-border-radius: 3px;
+}
