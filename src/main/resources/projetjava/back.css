@@ -1,0 +1,37 @@
+/* Style général du conteneur */
+.root {
+    -fx-font-family: 'Arial'; /* Utilisation d'une police claire et lisible */
+    -fx-base: #e7eff9; /* Couleur de base bleu clair pour les composants */
+    -fx-background-color: #dae3f3; /* Couleur de fond de la fenêtre en bleu très clair */
+}
+
+/* Styles des boutons */
+.button {
+    -fx-background-color: #2176FF; /* Couleur bleue vive pour les boutons */
+    -fx-text-fill: white; /* Texte blanc pour plus de contraste */
+    -fx-border-color: #1e5abc; /* Bordure bleue, légèrement plus foncée que le fond du bouton */
+    -fx-border-radius: 5; /* Bordures arrondies */
+    -fx-padding: 10 20 10 20; /* Padding pour augmenter la taille du texte */
+    -fx-font-size: 14px; /* Taille de police plus grande pour améliorer la lisibilité */
+}
+
+/* Styles des champs de texte */
+.text-field {
+    -fx-border-color: #adc2d9; /* Bordure en bleu-gris clair pour les champs de texte */
+    -fx-border-radius: 5; /* Bordures arrondies pour les champs de texte */
+    -fx-padding: 5 5 5 5; /* Padding interne */
+}
+
+/* Styles des zones de texte */
+.text-area {
+    -fx-border-color: #adc2d9; /* Bordure en bleu-gris, semblable aux champs de texte */
+    -fx-border-radius: 5; /* Bordures arrondies */
+    -fx-padding: 5; /* Padding interne */
+}
+
+/* Styles des étiquettes (labels) */
+.label {
+    -fx-text-fill: #2a3f5f; /* Couleur de texte foncée en bleu marine pour un contraste élevé sur fond clair */
+    -fx-font-size: 14px; /* Taille de police légèrement plus grande pour l'importance */
+    -fx-font-weight: bold; /* Texte en gras pour une meilleure visibilité */
+}
