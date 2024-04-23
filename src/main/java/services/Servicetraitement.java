@@ -43,10 +43,20 @@ public class Servicetraitement implements IService<traitement> {
     }
 
     @Override
-    public void supprimer(int id) throws SQLException {
-        String req = "delete from traitement where id=" + id;
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(req);
+    public void supprimer(traitement traitement) throws SQLException {
+        String req = "DELETE FROM traitement WHERE id = ?";
+        try (PreparedStatement statement = connection.prepareStatement(req)) {
+            statement.setInt(1, traitement.getId());
+            int affectedRows = statement.executeUpdate();
+            if (affectedRows == 0) {
+                System.out.println("Aucune ligne supprimée. Peut-être que l'ID n'existe pas.");
+            } else {
+                System.out.println("Suppression réussie.");
+            }
+        } catch (SQLException e) {
+            System.out.println("Erreur lors de la suppression: " + e.getMessage());
+            throw e;
+        }
 
 
     }
@@ -86,4 +96,73 @@ public class Servicetraitement implements IService<traitement> {
         }
         return false;
 
-}}
+}
+    public List<String> getAllLibelles1() throws SQLException {
+        List<String> noms = new ArrayList<>();
+        String req = "SELECT nom FROM traitement";
+        Statement statement = connection.createStatement();
+        ResultSet rs = statement.executeQuery(req);
+
+        while (rs.next()) {
+            noms.add(rs.getString("nom"));
+        }
+
+        rs.close();
+        statement.close();
+
+        return noms;
+    }
+    public int getIdByLibelle1(String nom) throws SQLException {
+        String req = "SELECT id FROM traitement WHERE nom = ?";
+        PreparedStatement pre = connection.prepareStatement(req);
+        pre.setString(1, nom);
+
+        ResultSet rs = pre.executeQuery();
+
+        if (rs.next()) {
+            int id = rs.getInt("id");
+            rs.close();
+            pre.close();
+            return id;
+        } else {
+            rs.close();
+            pre.close();
+            throw new RuntimeException("Le traitement avec le nom '" + nom + "' n'existe pas.");
+            // Ou vous pouvez retourner -1 pour indiquer que le traitement n'existe pas
+            // return -1;
+        }
+    }
+    public traitement getByLibelle1(String libelle) {
+        String query = "SELECT * FROM traitement WHERE nom = ?"; // Utiliser des requêtes paramétrées pour éviter l'injection SQL
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+        try {
+            Connection connexion = null;
+            ps = connexion.prepareStatement(query);
+            ps.setString(1, libelle); // Définir le paramètre de la requête
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                traitement tr = new traitement();
+                tr.setId(rs.getInt("id"));
+                tr.setNom(rs.getString("nom"));
+                tr.setDuree(rs.getInt("duree")); // Hypothèse: il existe un champ `duree`
+                tr.setPosologie(rs.getString("posologie")); // Hypothèse: il existe un champ `posologie`
+                tr.setNotes(rs.getString("notes")); // Hypothèse: il existe un champ `notes`
+                tr.setCout(rs.getInt("cout")); // Hypothèse: il existe un champ `cout`
+                return tr;
+            } else {
+                throw new RuntimeException("Le traitement avec le nom '" + libelle + "' n'existe pas.");
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("Erreur lors de la récupération du traitement par nom : " + e.getMessage());
+        } finally {
+            // Fermer les ressources JDBC
+            try {
+                if (rs != null) rs.close();
+                if (ps != null) ps.close();
+            } catch (SQLException e) {
+                throw new RuntimeException("Erreur lors de la fermeture des ressources JDBC : " + e.getMessage());
+            }
+        }
+    }
+}

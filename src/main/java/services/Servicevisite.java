@@ -2,6 +2,7 @@ package services;
 
 import entities.traitement;
 import entities.visite;
+import javafx.scene.control.Alert;
 import utils.MyDB;
 
 import java.sql.*;
@@ -17,13 +18,7 @@ public class Servicevisite implements IService<visite>{
 
     @Override
     public void ajouter(visite visite) throws SQLException {
-/*
-        String req = "INSERT INTO visite(date, lieu, heure, traitement_id)"+" VALUES('" + visite.getDate()+ "', '" + visite.getLieu() + "', '" + visite.getHeure() + "', " + visite.getTraitement().getId() + ")";
-        Statement statement= connection.createStatement();
-        statement.executeUpdate(req);
-            System.out.println("Visite ajoutée avec succès");
 
-*/
         String req = "INSERT INTO visite(date, lieu, heure, traitement_id) VALUES (?, ?, ?, ?)";
 
         // Using PreparedStatement to prevent SQL injection and ensure proper data types
@@ -32,9 +27,7 @@ public class Servicevisite implements IService<visite>{
         statement.setString(2, visite.getLieu());
         statement.setString(3, visite.getHeure());
         statement.setInt(4, visite.getTraitement().getId());
-
         int affectedRows = statement.executeUpdate();
-
         if (affectedRows == 0) {
             throw new SQLException("Insertion failed, no rows affected.");
         }
@@ -46,8 +39,9 @@ public class Servicevisite implements IService<visite>{
                 throw new SQLException("Insertion failed, no ID obtained.");
             }
         }
-
         System.out.println("Visite ajoutée avec succès");
+
+
     }
 
 
@@ -77,8 +71,8 @@ public class Servicevisite implements IService<visite>{
     }
 
     @Override
-    public void supprimer(int id) throws SQLException {
-        String req = "delete from visite where id="+id;
+    public void supprimer(visite visite) throws SQLException {
+        String req = "delete from visite where id=?";
         Statement statement = connection.createStatement();
         statement.executeUpdate(req);
 

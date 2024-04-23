@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.sql.SQLException;
 
 public class Ajoutertraitement {
+    private traitement traitementToUpdate;
     @FXML
     private Button ajouttfx;
 
@@ -119,4 +120,20 @@ public class Ajoutertraitement {
             return false;
         }
         return true;
-    }}
+    }
+
+    public void initDataForUpdate(traitement traitement) {
+        traitementToUpdate = traitement;
+
+        // Populate form fields with event data
+        nomfx.setText(traitement.getNom());
+        dureefx.setText(String.valueOf(traitement.getDuree()));
+        posologiefx.setText(String.valueOf(traitement.getPosologie()));
+        notefx.setText(traitement.getNotes());
+        coutfx.setText(String.valueOf(traitement.getCout()));
+
+
+
+        //  startdatepro.setText(entities.traitement.getPromo_start_date().toString());
+    }
+}

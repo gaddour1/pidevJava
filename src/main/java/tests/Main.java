@@ -34,17 +34,17 @@ public class Main {
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
-
+*/
 
                 // visite
         Servicevisite servicevisite = new Servicevisite();
         try{
-            servicevisite.modifier(visite222);
+            servicevisite.ajouter(visite222);
         } catch(SQLException e){
             System.out.println(e.getMessage());
         }
 
-*/
+/*
         Servicevisite servicevisite = new Servicevisite();
       try{
           servicevisite.supprimer(145);
@@ -59,5 +59,5 @@ public class Main {
             System.out.println(e.getMessage());
         }
     }
-
-}
+*/
+}}

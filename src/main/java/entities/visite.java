@@ -77,5 +77,6 @@ public class visite {
                 ", heure='" + heure + '\'' +
                 traitementDetails +
                 '}';
-}}
+}
+}
 
