@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@addEvent.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Admin_Controller">
+   <!-- Sidebar -->
+   <AnchorPane prefHeight="400.0" prefWidth="204.0" style="-fx-background-color: #0050a7;">
+      <!-- Sidebar content -->
+      <!-- Top section with user image and name -->
+      <AnchorPane layoutX="2.0" layoutY="8.0" prefHeight="100.0" prefWidth="201.0">
+         <!-- User image -->
+         <Button layoutX="40.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <!-- Add your user image icon here -->
+         </Button>
+         <!-- User name label -->
+         <Label layoutX="75.0" layoutY="45.0" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: white;" text="John Doe" />
+         <Line endX="100.0" layoutX="99.0" layoutY="86.0" startX="-100.0" stroke="WHITE" />
+      </AnchorPane>
+      <Button layoutX="14.0" layoutY="149.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion Evenements" />
+      <Button layoutX="14.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion RDV" />
+      <Button layoutX="15.0" layoutY="225.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion Infermier" />
+      <Button layoutX="15.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion Produits" />
+   </AnchorPane>
+
+   <!-- Main content area -->
+   <AnchorPane layoutX="200.0" prefHeight="400.0" prefWidth="400.0" styleClass="main-pane">
+      <children>
+         <!-- Your existing content here -->
+         <Button layoutX="14.0" layoutY="356.0" mnemonicParsing="false" onAction="#ajouterEvent" styleClass="action-button" text="Ajouter" />
+         <ListView fx:id="ListViewEvents" layoutX="266.0" layoutY="36.0" prefHeight="300.0" prefWidth="300.0" styleClass="list-view" />
+         <Button layoutX="104.0" layoutY="355.0" mnemonicParsing="false" onAction="#supprimerEvent" styleClass="action-button delete-button" text="Supprimer" />
+         <Button layoutX="199.0" layoutY="355.0" mnemonicParsing="false" onAction="#modifierEvent" styleClass="action-button modify-button" text="Modifier" />
+         <TextField fx:id="prenom" layoutX="47.0" layoutY="36.0" prefHeight="32.0" prefWidth="179.0" promptText="Prenom" />
+         <TextField fx:id="email_reg" layoutX="45.0" layoutY="261.0" promptText="Email" />
+         <TextField fx:id="password_reg" layoutX="45.0" layoutY="299.0" prefHeight="22.0" prefWidth="179.0" promptText="Mot de passe" />
+         <ChoiceBox fx:id="choiceBox" layoutX="45.0" layoutY="223.0" prefHeight="32.0" prefWidth="179.0">
+            <items>
+               <FXCollections fx:factory="observableArrayList">
+                  <String fx:value="Infirmier" />
+                  <String fx:value="Patient" />
+                  <String fx:value="Médecin" />
+               </FXCollections>
+            </items>
+         </ChoiceBox>
+         <TextField fx:id="cin" layoutX="47.0" layoutY="148.0" prefHeight="32.0" prefWidth="179.0" promptText="CIN" />
+         <TextField fx:id="nom" layoutX="47.0" layoutY="74.0" prefHeight="32.0" prefWidth="179.0" promptText="Nom" />
+         <TextField fx:id="numero" layoutX="47.0" layoutY="112.0" prefHeight="32.0" prefWidth="179.0" promptText="Numero" />
+         <TextField fx:id="adresse" layoutX="46.0" layoutY="186.0" prefHeight="32.0" prefWidth="179.0" promptText="Adresee" />
+      </children>
+   </AnchorPane>
+</AnchorPane>

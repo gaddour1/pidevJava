@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane prefHeight="527.0" prefWidth="1182.0" stylesheets="@addEvent.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.AdminController">
+   <children>
+      <Label ellipsisString="" layoutX="856.0" layoutY="30.0" prefHeight="51.0" prefWidth="246.0" text="Liste des utilisateurs" textAlignment="RIGHT" textFill="#12945b">
+         <font>
+            <Font size="24.0" />
+         </font>
+      </Label>
+      <Button layoutX="411.0" layoutY="472.0" mnemonicParsing="false" onAction="#ajouter" prefHeight="32.0" prefWidth="101.0" text="Ajouter" />
+      <Button layoutX="536.0" layoutY="472.0" mnemonicParsing="false" onAction="#modifier" prefHeight="32.0" prefWidth="101.0" text="Modifier" />
+      <Button layoutX="663.0" layoutY="472.0" mnemonicParsing="false" onAction="#supprimer" prefHeight="32.0" prefWidth="101.0" text="Supprimer" />
+      <AnchorPane layoutY="65.0" prefHeight="200.0" prefWidth="200.0" />
+      <AnchorPane layoutX="663.0" layoutY="82.0" prefHeight="440.0" prefWidth="512.0">
+         <children>
+            <ListView fx:id="userListView" layoutX="183.0" layoutY="31.0" prefHeight="300.0" prefWidth="300.0" styleClass="list-view" />
+         </children></AnchorPane>
+      <TextField fx:id="M_prenom" layoutX="516.0" layoutY="140.0" />
+      <TextField fx:id="M_adresse" layoutX="516.0" layoutY="267.0" />
+      <TextField fx:id="M_numero" layoutX="516.0" layoutY="182.0" />
+      <TextField fx:id="M_cin" layoutX="516.0" layoutY="224.0" />
+      <TextField fx:id="M_motDePasse" layoutX="516.0" layoutY="396.0" />
+      <TextField fx:id="M_email" layoutX="516.0" layoutY="355.0" />
+      <Label layoutX="405.0" layoutY="105.0" prefHeight="22.0" prefWidth="78.0" text="Nom " />
+      <Label layoutX="405.0" layoutY="145.0" prefHeight="22.0" prefWidth="78.0" text="Prénom" />
+      <Label layoutX="405.0" layoutY="187.0" prefHeight="22.0" prefWidth="78.0" text="Numéro" />
+      <Label layoutX="405.0" layoutY="229.0" prefHeight="22.0" prefWidth="78.0" text="CIN" />
+      <Label layoutX="405.0" layoutY="272.0" prefHeight="22.0" prefWidth="78.0" text="Adresse" />
+      <Label layoutX="405.0" layoutY="360.0" prefHeight="22.0" prefWidth="78.0" text="Email" />
+      <Label layoutX="405.0" layoutY="401.0" prefHeight="22.0" prefWidth="114.0" text="Mot de passe" />
+      <TextField fx:id="M_nom" layoutX="515.0" layoutY="100.0" />
+      <AnchorPane layoutX="-4.0" layoutY="-7.0" prefHeight="570.0" prefWidth="268.0" styleClass="nav-form" stylesheets="@admin.css">
+         <children>
+            <ImageView fitHeight="150.0" fitWidth="200.0" layoutX="56.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@image/9703596.png" />
+               </image>
+            </ImageView>
+            <Label layoutX="113.0" layoutY="170.0" text="ADMIN" textFill="WHITE">
+               <font>
+                  <Font name="Berlin Sans FB" size="16.0" />
+               </font>
+            </Label>
+            <Button layoutX="42.0" layoutY="291.0" mnemonicParsing="false" stylesheets="@cards.css" text="GESTION PRODUITS">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
+            </Button>
+            <Separator layoutX="32.0" layoutY="231.0" prefWidth="200.0" />
+            <Button layoutX="43.0" layoutY="335.0" mnemonicParsing="false" stylesheets="@cards.css" text="GESTION PRODUITS">
+               <font>
+                  <Font name="Berlin Sans FB" size="18.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
+            </Button>
+            <Button layoutX="45.0" layoutY="380.0" mnemonicParsing="false" stylesheets="@cards.css" text="GESTION PRODUITS">
+               <font>
+                  <Font name="Berlin Sans FB" size="12.0" />
+               </font>
+               <styleClass>
+                  <String fx:value="nav-btn" />
+                  <String fx:value="mouse-moved" />
+               </styleClass>
+            </Button>
+         </children>
+      </AnchorPane>
+      <Label layoutX="405.0" layoutY="317.0" prefHeight="22.0" prefWidth="50.0" text="Rôle" />
+      <ChoiceBox fx:id="M_role" layoutX="516.0" layoutY="312.0" prefHeight="32.0" prefWidth="181.0" />
+   </children>
+</AnchorPane>
