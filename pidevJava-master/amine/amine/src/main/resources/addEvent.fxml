@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ListView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.shape.Line?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="@addEvent.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.amine.controllers.addEventController">
+   <!-- Sidebar -->
+   <AnchorPane prefHeight="400.0" prefWidth="204.0" style="-fx-background-color: #0050a7;">
+      <!-- Sidebar content -->
+      <!-- Top section with user image and name -->
+      <AnchorPane layoutX="2.0" layoutY="8.0" prefHeight="100.0" prefWidth="201.0">
+         <!-- User image -->
+         <Button layoutX="40.0" layoutY="30.0" mnemonicParsing="false" style="-fx-background-color: transparent;">
+            <!-- Add your user image icon here -->
+         </Button>
+         <!-- User name label -->
+         <Label layoutX="75.0" layoutY="45.0" prefHeight="30.0" prefWidth="125.0" style="-fx-text-fill: white;" text="John Doe" />
+         <Line endX="100.0" layoutX="99.0" layoutY="86.0" startX="-100.0" stroke="WHITE" />
+      </AnchorPane>
+      <Button layoutX="14.0" layoutY="149.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion Evenements" />
+      <Button layoutX="14.0" layoutY="187.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion RDV" />
+      <Button layoutX="15.0" layoutY="225.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion Infermier" />
+      <Button layoutX="15.0" layoutY="261.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="176.0" text="Gestion Produits" />
+   </AnchorPane>
+
+   <!-- Main content area -->
+   <AnchorPane layoutX="200.0" prefHeight="400.0" prefWidth="400.0" styleClass="main-pane">
+      <children>
+         <!-- Your existing content here -->
+         <Button layoutX="30.0" layoutY="310.0" mnemonicParsing="false" onAction="#ajouterEvent" styleClass="action-button" text="Ajouter" />
+         <TextField fx:id="titreId" layoutX="30.0" layoutY="50.0" prefHeight="25.0" prefWidth="200.0" promptText="Titre" styleClass="text-field" />
+         <TextField fx:id="descriptionId" layoutX="30.0" layoutY="90.0" prefHeight="100.0" prefWidth="200.0" promptText="Description" styleClass="text-area" />
+         <TextField fx:id="lieuId" layoutX="30.0" layoutY="200.0" prefHeight="25.0" prefWidth="200.0" promptText="Lieu" styleClass="text-field" />
+         <ListView fx:id="ListViewEvents" layoutX="280.0" layoutY="50.0" prefHeight="300.0" prefWidth="300.0" styleClass="list-view" />
+         <DatePicker fx:id="dateId1" layoutX="30.0" layoutY="160.0" prefHeight="25.0" prefWidth="200.0" promptText="Date" styleClass="date-picker" />
+         <Button layoutX="120.0" layoutY="310.0" mnemonicParsing="false" onAction="#supprimerEvent" styleClass="action-button delete-button" text="Supprimer" />
+         <Button layoutX="210.0" layoutY="310.0" mnemonicParsing="false" onAction="#modifierEvent" styleClass="action-button modify-button" text="Modifier" />
+      </children>
+   </AnchorPane>
+</AnchorPane>
