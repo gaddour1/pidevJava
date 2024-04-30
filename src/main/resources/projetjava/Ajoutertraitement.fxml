@@ -10,9 +10,9 @@
 <?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="back.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Ajoutertraitement">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" stylesheets="../back.css" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Ajoutertraitement">
    <children>
-      <Button id="ajouttrait" fx:id="ajouttfx" layoutX="300.0" layoutY="329.0" mnemonicParsing="false" onAction="#ajouterbtn" prefHeight="37.0" prefWidth="122.0" stylesheets="@back.css" text="Ajouter ">
+      <Button id="ajouttrait" fx:id="ajouttfx" layoutX="300.0" layoutY="329.0" mnemonicParsing="false" onAction="#ajouterbtn" prefHeight="37.0" prefWidth="122.0" stylesheets="@../back.css" text="Ajouter ">
          <textFill>
             <LinearGradient endX="1.0" endY="0.6208530805687205" startX="0.9620853080568721">
                <stops>
@@ -30,22 +30,22 @@
             </LinearGradient>
          </textFill>
       </Button>
-      <Label layoutX="41.0" layoutY="120.0" stylesheets="@back.css" text="Nom traitement:" textFill="#2727c6" />
-      <TextField id="nom " fx:id="nomfx" layoutX="41.0" layoutY="158.0" styleClass="text-field" stylesheets="@back.css" />
-      <Label layoutX="41.0" layoutY="192.0" stylesheets="@back.css" text="Durée:" textFill="#2727c6" />
-      <TextField id="duree" fx:id="dureefx" layoutX="41.0" layoutY="217.0" styleClass="text-field" stylesheets="@back.css" />
-      <TextArea id="notes" fx:id="notefx" layoutX="273.0" layoutY="146.0" prefHeight="93.0" prefWidth="149.0" styleClass="text-area" stylesheets="@back.css" />
-      <Label layoutX="271.0" layoutY="111.0" stylesheets="@back.css" text=" Notes:" textFill="#2727c6" />
-      <Label layoutX="41.0" layoutY="252.0" stylesheets="@back.css" text="Posologie:" textFill="#2727c6" />
+      <Label layoutX="41.0" layoutY="120.0" stylesheets="@../back.css" text="Nom traitement:" textFill="#2727c6" />
+      <TextField id="nom " fx:id="nomfx" layoutX="41.0" layoutY="158.0" styleClass="text-field" stylesheets="@../back.css" />
+      <Label layoutX="41.0" layoutY="192.0" stylesheets="@../back.css" text="Durée:" textFill="#2727c6" />
+      <TextField id="duree" fx:id="dureefx" layoutX="41.0" layoutY="217.0" styleClass="text-field" stylesheets="@../back.css" />
+      <TextArea id="notes" fx:id="notefx" layoutX="273.0" layoutY="146.0" prefHeight="93.0" prefWidth="149.0" styleClass="text-area" stylesheets="@../back.css" />
+      <Label layoutX="271.0" layoutY="111.0" stylesheets="@../back.css" text=" Notes:" textFill="#2727c6" />
+      <Label layoutX="41.0" layoutY="252.0" stylesheets="@../back.css" text="Posologie:" textFill="#2727c6" />
       <TextField id="posologie" fx:id="posologiefx" layoutX="41.0" layoutY="284.0" />
-      <Label layoutX="274.0" layoutY="252.0" stylesheets="@back.css" text="Cout:" textFill="#2727c6" />
+      <Label layoutX="274.0" layoutY="252.0" stylesheets="@../back.css" text="Cout:" textFill="#2727c6" />
       <TextField id="cout" fx:id="coutfx" layoutX="273.0" layoutY="284.0" />
       <Label layoutX="220.0" layoutY="48.0" text="Ajout de traitement" textFill="#3224ae" underline="true">
          <font>
             <Font name="Lucida Bright" size="22.0" />
          </font>
       </Label>
-      <Button id="ajouttrait" fx:id="afficherfx" layoutX="442.0" layoutY="329.0" mnemonicParsing="false" onAction="#afficherbtn" prefHeight="37.0" prefWidth="122.0" stylesheets="@back.css" text="Afficher">
+      <Button id="ajouttrait" fx:id="afficherfx" layoutX="442.0" layoutY="329.0" mnemonicParsing="false" onAction="#afficherbtn" prefHeight="37.0" prefWidth="122.0" stylesheets="@../back.css" text="Afficher">
          <textFill>
             <LinearGradient endX="1.0" endY="0.6208530805687205" startX="0.9620853080568721">
                <stops>

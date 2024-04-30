@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -8,14 +9,17 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Affichertraitement">
    <children>
-      <TableView fx:id="tableview" editable="true" layoutX="5.0" layoutY="64.0" prefHeight="330.0" prefWidth="593.0">
+      <TableView fx:id="tableview" editable="true" layoutY="77.0" prefHeight="323.0" prefWidth="699.0">
         <columns>
-          <TableColumn fx:id="nomtv" prefWidth="90.0" text="Nom:" />
-          <TableColumn fx:id="dureetv" prefWidth="63.0" text="Duree:" />
-            <TableColumn fx:id="posologietv" prefWidth="111.0" text="Posologie:" />
-            <TableColumn fx:id="notestv" prefWidth="104.0" text="Notes:" />
-            <TableColumn fx:id="couttv" prefWidth="94.0" text="Cout:" />
-            <TableColumn fx:id="actioncolumn" prefWidth="130.0" text="Actions:" />
+            <TableColumn fx:id="idtv" prefWidth="75.0" text="ID:" />
+          <TableColumn fx:id="nomtv" prefWidth="121.0" text="Nom:" />
+          <TableColumn fx:id="dureetv" prefWidth="72.0" text="Duree:" />
+            <TableColumn fx:id="posologietv" prefWidth="98.0" text="Posologie:" />
+            <TableColumn fx:id="notestv" prefWidth="121.0" text="Notes:" />
+            <TableColumn fx:id="couttv" prefWidth="62.0" text="Cout:" />
+            <TableColumn fx:id="actioncolumn" prefWidth="223.0" text="Actions:" />
+            <TableColumn prefWidth="75.0" text="Column X" />
+            <TableColumn prefWidth="75.0" text="Column X" />
         </columns>
       </TableView>
       <Text fill="#1a2dd7" layoutX="161.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Liste des traitements">
@@ -23,5 +27,6 @@
             <Font name="Arabic Typesetting" size="44.0" />
          </font>
       </Text>
+      <Button layoutX="486.0" layoutY="21.0" mnemonicParsing="false" onAction="#refresh" text="Refresh" />
    </children>
 </AnchorPane>

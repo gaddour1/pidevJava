@@ -20,18 +20,18 @@ public class Servicevisite implements IService<visite>{
     public void ajouter(visite visite) throws SQLException {
 
         String req = "INSERT INTO visite(date, lieu, heure, traitement_id) VALUES (?, ?, ?, ?)";
-
-        // Using PreparedStatement to prevent SQL injection and ensure proper data types
         PreparedStatement statement = connection.prepareStatement(req, Statement.RETURN_GENERATED_KEYS);
         statement.setString(1, visite.getDate());
         statement.setString(2, visite.getLieu());
         statement.setString(3, visite.getHeure());
         statement.setInt(4, visite.getTraitement().getId());
+
+
+
         int affectedRows = statement.executeUpdate();
         if (affectedRows == 0) {
             throw new SQLException("Insertion failed, no rows affected.");
         }
-
         try (ResultSet generatedKeys = statement.getGeneratedKeys()) {
             if (generatedKeys.next()) {
                 visite.setId(generatedKeys.getInt(1));
@@ -39,13 +39,8 @@ public class Servicevisite implements IService<visite>{
                 throw new SQLException("Insertion failed, no ID obtained.");
             }
         }
-        System.out.println("Visite ajoutée avec succès");
-
 
     }
-
-
-
 
     @Override
     public void modifier(visite visite) throws SQLException {
@@ -72,37 +67,54 @@ public class Servicevisite implements IService<visite>{
 
     @Override
     public void supprimer(visite visite) throws SQLException {
-        String req = "delete from visite where id=?";
-        Statement statement = connection.createStatement();
-        statement.executeUpdate(req);
-
+        String req = "DELETE FROM visite WHERE id=?";
+        PreparedStatement pre = connection.prepareStatement(req);
+        pre.setInt(1, visite.getId());
+        int affectedRows = pre.executeUpdate();
+        if (affectedRows > 0) {
+            System.out.println("Visite supprimée avec succès");
+        } else {
+            System.out.println("Aucune visite n'a été supprimée. Vérifiez que l'ID existe.");
+        }
 
     }
 
     @Override
     public List<visite> afficher() throws SQLException {
-      /*  List<visite> visites = new ArrayList<>();
-        String req = "select * from visite";
-        Statement statement = connection.createStatement();
-        ResultSet rs = statement.executeQuery(req);
-        while (rs.next()) {
-            traitement trait = new traitement("amna", 20, "aaaaaa", "amnaaa", 12);
+        List<visite> visites = new ArrayList<>();
+        String req = "SELECT v.*, t.nom, t.duree, t.posologie, t.notes, t.cout FROM visite v JOIN traitement t ON v.traitement_id = t.id";
+        try (Statement statement = connection.createStatement();
+             ResultSet rs = statement.executeQuery(req)) {
 
-            visite visite = new visite(145, "2015-5-15", "aaaaaa", "15:17",trait  );
+            while (rs.next()) {
+                int traitementId = rs.getInt("traitement_id");
+                String traitementNom = rs.getString("nom");
+                int traitementDuree = rs.getInt("duree");
+                String traitementPosologie = rs.getString("posologie");
+                String traitementNotes = rs.getString("notes");
+                int traitementCout = rs.getInt("cout");
 
-            visite.setDate(rs.getString("date"));
-            visite.setLieu(rs.getString("lieu"));
-            visite.setHeure(rs.getString("heure"));
-            visite.setTraitement(rs.getString("traitement_id"));
-            visites.add(visite);
+                traitement trait = new traitement(traitementId, traitementNom, traitementDuree, traitementPosologie, traitementNotes, traitementCout);
+
+                visite visite = new visite();
+               visite.setId(rs.getInt("id"));
+                visite.setDate(rs.getString("date"));
+                visite.setLieu(rs.getString("lieu"));
+                visite.setHeure(rs.getString("heure"));
+                visite.setTraitement(trait);
+
+                visites.add(visite);
+            }
+        } catch (SQLException e) {
+            System.err.println("Erreur lors de la récupération des visites : " + e.getMessage());
+            throw e; // Rethrow the exception to handle it at a higher level
         }
-
         return visites;
 
-       */
 
 
 
+/*
         List<visite> visites = new ArrayList<>();
         // Simplified SQL to include only necessary fields from the `visite` table and the treatment ID from the `traitement` table
         String sql = "SELECT v.id, v.date, v.lieu, v.heure, v.traitement_id FROM visite v";
@@ -127,4 +139,4 @@ public class Servicevisite implements IService<visite>{
             }
         }
         return visites;
-    }}
+    }*/}}

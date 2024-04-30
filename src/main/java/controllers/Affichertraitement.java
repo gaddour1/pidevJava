@@ -56,6 +56,26 @@ public class Affichertraitement {
 
     private ObservableList<traitement> observableList;
     @FXML
+    private TableColumn<?, ?> idtv;
+
+    @FXML
+    void refresh(ActionEvent event) {
+        try {
+
+            List<traitement> updatedEventList = servicestraitement.afficher();
+
+            traitementsobservableList.setAll(updatedEventList);
+            tableview.setItems(traitementsobservableList);
+            tableview.refresh();
+
+            showInformationAlert("Success", "Table View refreshed successfully with updated data");
+        } catch (SQLException e) {
+
+            showAlert("Error", "Error refreshing Table View", e.getMessage());
+        }
+
+    }
+    @FXML
          void initialize() {
         /*
         Servicetraitement servicetraitement = new Servicetraitement();
@@ -207,5 +227,7 @@ public class Affichertraitement {
             Optional<ButtonType> result = alert.showAndWait();
             return result.isPresent() && result.get() == ButtonType.OK;
         }
+
+
     }
 

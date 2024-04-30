@@ -44,20 +44,15 @@ public class Servicetraitement implements IService<traitement> {
 
     @Override
     public void supprimer(traitement traitement) throws SQLException {
-        String req = "DELETE FROM traitement WHERE id = ?";
-        try (PreparedStatement statement = connection.prepareStatement(req)) {
-            statement.setInt(1, traitement.getId());
-            int affectedRows = statement.executeUpdate();
-            if (affectedRows == 0) {
-                System.out.println("Aucune ligne supprimée. Peut-être que l'ID n'existe pas.");
-            } else {
-                System.out.println("Suppression réussie.");
-            }
-        } catch (SQLException e) {
-            System.out.println("Erreur lors de la suppression: " + e.getMessage());
-            throw e;
+        String req = "DELETE FROM visite WHERE id=?";
+        PreparedStatement pre = connection.prepareStatement(req);
+        pre.setInt(1, traitement.getId());
+        int affectedRows = pre.executeUpdate();
+        if (affectedRows > 0) {
+            System.out.println("traitement supprimée avec succès");
+        } else {
+            System.out.println("Aucune traitement n'a été supprimée. Vérifiez que l'ID existe.");
         }
-
 
     }
 
@@ -68,8 +63,8 @@ public class Servicetraitement implements IService<traitement> {
         Statement statement = connection.createStatement();
         ResultSet rs = statement.executeQuery(req);
         while (rs.next()) {
-            traitement trait = new traitement("amna", 20, "aaaaaa", "amnaaa", 12);
-
+            traitement trait = new traitement(10,"amna", 20, "aaaaaa", "amnaaa", 12);
+            trait.setId(rs.getInt("id"));
             trait.setNom(rs.getString("nom"));
             trait.setDuree(rs.getInt("duree"));
             trait.setPosologie(rs.getString("posologie"));
