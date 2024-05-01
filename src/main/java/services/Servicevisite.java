@@ -2,6 +2,7 @@ package services;
 
 import entities.traitement;
 import entities.visite;
+import javafx.scene.chart.PieChart;
 import javafx.scene.control.Alert;
 import utils.MyDB;
 
@@ -140,19 +141,21 @@ public class Servicevisite implements IService<visite>{
         return visites;
     }*/
     }
-        public boolean exists(visite newVisite) throws SQLException {
-            String query = "SELECT COUNT(*) FROM visite WHERE nom = ? AND posologie = ? AND notes = ? AND duree = ? AND cout = ?";
-            try (PreparedStatement stmt = connection.prepareStatement(query)) {
-                stmt.setString(1, newVisite.getDate());
-                stmt.setString(2, newVisite.getLieu());
-                stmt.setString(3, newVisite.getHeure());
-                stmt.setInt(4, newVisite.getTraitement().getId());
 
-                ResultSet rs = stmt.executeQuery();
-                if (rs.next()) {
-                    return rs.getInt(1) > 0; // returns true if there is at least one matching record
-                }
+    public List<PieChart.Data> getMostUsedTreatments() {
+        String sql = "SELECT t.nom, COUNT(v.traitement_id) AS count FROM visite v JOIN traitement t ON v.traitement_id = t.id GROUP BY v.traitement_id ORDER BY count DESC LIMIT 10";
+        List<PieChart.Data> data = new ArrayList<>();
+        try (Statement stmt = this.connection.createStatement();
+
+
+             ResultSet rs = stmt.executeQuery(sql)) {
+            while (rs.next()) {
+                String treatmentName = rs.getString("nom");
+                int count = rs.getInt("count");
+                data.add(new PieChart.Data(treatmentName, count));
             }
-            return false;
-
-        }}
+        } catch (SQLException e) {
+            System.out.println("Error accessing the database: " + e.getMessage());
+        }
+        return data;
+    }}

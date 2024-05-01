@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.chart.PieChart?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Text?>
+
+<BorderPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.Statistiques">
+   <top>
+      <Text style="-fx-font-size: 20px; -fx-text-fill: black; -fx-font-weight: bold; -fx-alignment: center;" text="Les traitements les plus demandés" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="10" left="10" right="10" top="10" />
+         </BorderPane.margin>
+      </Text>
+   </top>
+   <center>
+      <PieChart fx:id="pieChart" />
+   </center>
+   <bottom>
+      <Button mnemonicParsing="false" onAction="#refresh" text="Refresh" BorderPane.alignment="CENTER" />
+   </bottom>
+</BorderPane>

@@ -1,0 +1,13 @@
+.root {
+    -fx-font-family: 'Arial';
+}
+
+.pie-chart {
+    -fx-label-line-length: 20;
+    -fx-font-size: 14px;
+}
+
+.chart-legend {
+    -fx-background-color: white;
+    -fx-padding: 15px;
+}
