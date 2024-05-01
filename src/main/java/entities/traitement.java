@@ -83,7 +83,7 @@ public class traitement {
 
     @Override
     public String toString() {
-        // Only append non-null and non-default values to the string
+        /*
         List<String> attributes = new ArrayList<>();
         if (id > 0) attributes.add("id=" + id);
         if (nom != null && !nom.isEmpty()) attributes.add("nom='" + nom + "'");
@@ -93,5 +93,13 @@ public class traitement {
         if (cout > 0) attributes.add("cout=" + cout);
 
         return "traitement{" + String.join(", ", attributes) + "}";
-    }
+    }*/
+        return "traitement{" +
+                (id > 0 ? "id=" + id : "") +
+                (nom != null && !nom.isEmpty() ? ", nom='" + nom + "'" : "") +
+                (duree > 0 ? ", duree=" + duree : "") +
+                (posologie != null && !posologie.isEmpty() ? ", posologie='" + posologie + "'" : "") +
+                (notes != null && !notes.isEmpty() ? ", notes='" + notes + "'" : "") +
+                (cout > 0 ? ", cout=" + cout : "") +
+                '}';}
 }

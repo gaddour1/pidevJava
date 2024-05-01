@@ -5,6 +5,8 @@ import entities.visite;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -39,28 +41,63 @@ public class Affichervisite {
 
     @FXML
     private TableColumn<visite, String> lieuv;
-
+    @FXML
+    private TextField searchfield;
     @FXML
     private TableView<visite> tablev;
 
     @FXML
     private TableColumn<visite, String> traitementv;
 
-
     private ObservableList<visite> visitesObservableList = FXCollections.observableArrayList();
+    private ObservableList<visite> observableList ;
     private Servicevisite serviceVisite = new Servicevisite();
+
 
     @FXML
     void initialize() {
         initializeVisiteTab();
         setupActionColumn();
     }
+    private void filterTableView(String searchText) {
+        // Create a filtered list to hold the filtered items
+        FilteredList<visite> filteredList = new FilteredList<>(observableList, p -> true);
+
+        // Set predicate to filter based on search text
+        filteredList.setPredicate(visite-> {
+            // If search text is empty, show all items
+            if (searchText == null || searchText.isEmpty()) {
+                return true;
+            }
+
+            // Convert search text to lowercase for case-insensitive comparison
+            String lowerCaseFilter = searchText.toLowerCase();
+
+            // Check if category name or description contains the search text
+            if (visite.getLieu().toLowerCase().contains(lowerCaseFilter) ||
+                    visite.getHeure().toLowerCase().contains(lowerCaseFilter) ||
+                    visite.getDate().toLowerCase().contains(lowerCaseFilter)) {
+                return true; // Show item if it matches the search text
+            }
+            return false; // Hide item if it doesn't match the search text
+        });
+
+        // Wrap the filtered list in a SortedList
+        SortedList<visite> sortedList = new SortedList<>(filteredList);
+
+        // Bind the sorted list to the TableView
+        sortedList.comparatorProperty().bind(tablev.comparatorProperty());
+        tablev.setItems(sortedList);
+    }
+
 
     private void initializeVisiteTab() {
         try {
             List<visite> visiteList = serviceVisite.afficher();
             visitesObservableList.setAll(visiteList);
-            tablev.setItems(visitesObservableList);
+          //  tablev.setItems(visitesObservableList);
+            observableList = FXCollections.observableArrayList(visiteList); // Properly initialize observableList
+            tablev.setItems(observableList);
 
             datev.setCellValueFactory(new PropertyValueFactory<>("date"));
             lieuv.setCellValueFactory(new PropertyValueFactory<>("lieu"));
@@ -69,6 +106,11 @@ public class Affichervisite {
         } catch (SQLException e) {
             showAlert("Error", "Error Loading visites", e.getMessage());
         }
+            searchfield.textProperty().addListener((observable, oldValue, newValue) -> {
+                // Call method to filter TableView based on search text
+                filterTableView(newValue);
+            });
+
     }
 
     @FXML

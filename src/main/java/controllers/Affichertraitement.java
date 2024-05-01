@@ -3,6 +3,8 @@ package controllers;
 import entities.traitement;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -43,7 +45,8 @@ public class Affichertraitement {
 
     @FXML
     private TableColumn<traitement, String> notestv;
-
+    @FXML
+    private TextField searchfield;
     @FXML
     private TableColumn<traitement, String> posologietv;
 
@@ -75,27 +78,37 @@ public class Affichertraitement {
         }
 
     }
+    private void filterTableView(String searchText) {
+        // Create a filtered list to hold the filtered items
+        FilteredList<traitement> filteredList = new FilteredList<>(observableList, p -> true);
+
+        // Set predicate to filter based on search text
+        filteredList.setPredicate(traitement -> {
+            // If search text is empty, show all items
+            if (searchText == null || searchText.isEmpty()) {
+                return true;
+            }
+
+            // Convert search text to lowercase for case-insensitive comparison
+            String lowerCaseFilter = searchText.toLowerCase();
+
+            // Check if category name or description contains the search text
+            if (traitement.getNom().toLowerCase().contains(lowerCaseFilter) ) {
+                return true; // Show item if it matches the search text
+            }
+            return false; // Hide item if it doesn't match the search text
+        });
+
+        // Wrap the filtered list in a SortedList
+        SortedList<traitement> sortedList = new SortedList<>(filteredList);
+
+        // Bind the sorted list to the TableView
+        sortedList.comparatorProperty().bind(tableview.comparatorProperty());
+        tableview.setItems(sortedList);
+    }
+
     @FXML
          void initialize() {
-        /*
-        Servicetraitement servicetraitement = new Servicetraitement();
-        try {
-            List<traitement> traitements = servicetraitement.afficher();
-            ObservableList<traitement> observableList = FXCollections.observableList(traitements);
-            tableview.setItems(observableList);
-            nomtv.setCellValueFactory(new PropertyValueFactory<>("nom"));
-            dureetv.setCellValueFactory(new PropertyValueFactory<>("duree"));
-            posologietv.setCellValueFactory(new PropertyValueFactory<>("posologie"));
-            notestv.setCellValueFactory(new PropertyValueFactory<>("notes"));
-            posologietv.setCellValueFactory(new PropertyValueFactory<>("posologie"));
-            couttv.setCellValueFactory(new PropertyValueFactory<>("cout"));
-            posologietv.setCellValueFactory(new PropertyValueFactory<>("posologie"));
-
-
-        } catch (SQLException e) {
-            System.err.println(e.getMessage());
-        }
-*/
         initializetraitementtab();
         setupActionColumn();
          }
@@ -121,10 +134,10 @@ public class Affichertraitement {
             showAlert("Error", "Error Loading traitements", e.getMessage());
         }
         // Add listener to search field
-      // searchfieldpro.textProperty().addListener((observable, oldValue, newValue) -> {
+       searchfield.textProperty().addListener((observable, oldValue, newValue) -> {
             // Call method to filter TableView based on search text
-      //    filterTableView(newValue);
-      // });
+         filterTableView(newValue);
+      });
 
     }
 
@@ -229,5 +242,6 @@ public class Affichertraitement {
         }
 
 
-    }
+
+         }
 

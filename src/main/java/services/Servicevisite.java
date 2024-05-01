@@ -76,7 +76,6 @@ public class Servicevisite implements IService<visite>{
         } else {
             System.out.println("Aucune visite n'a été supprimée. Vérifiez que l'ID existe.");
         }
-
     }
 
     @Override
@@ -97,7 +96,7 @@ public class Servicevisite implements IService<visite>{
                 traitement trait = new traitement(traitementId, traitementNom, traitementDuree, traitementPosologie, traitementNotes, traitementCout);
 
                 visite visite = new visite();
-               visite.setId(rs.getInt("id"));
+                visite.setId(rs.getInt("id"));
                 visite.setDate(rs.getString("date"));
                 visite.setLieu(rs.getString("lieu"));
                 visite.setHeure(rs.getString("heure"));
@@ -139,4 +138,21 @@ public class Servicevisite implements IService<visite>{
             }
         }
         return visites;
-    }*/}}
+    }*/
+    }
+        public boolean exists(visite newVisite) throws SQLException {
+            String query = "SELECT COUNT(*) FROM visite WHERE nom = ? AND posologie = ? AND notes = ? AND duree = ? AND cout = ?";
+            try (PreparedStatement stmt = connection.prepareStatement(query)) {
+                stmt.setString(1, newVisite.getDate());
+                stmt.setString(2, newVisite.getLieu());
+                stmt.setString(3, newVisite.getHeure());
+                stmt.setInt(4, newVisite.getTraitement().getId());
+
+                ResultSet rs = stmt.executeQuery();
+                if (rs.next()) {
+                    return rs.getInt(1) > 0; // returns true if there is at least one matching record
+                }
+            }
+            return false;
+
+        }}

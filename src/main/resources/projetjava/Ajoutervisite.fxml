@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -15,31 +14,31 @@
             <Font name="Andalus" size="31.0" />
          </font>
       </Text>
-      <DatePicker fx:id="datefx" layoutX="39.0" layoutY="125.0" />
-      <Text fill="#3761ae" layoutX="39.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de visite:">
+      <DatePicker fx:id="datefx" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="125.0" />
+      <Text fill="#3761ae" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de visite:">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="lieuv" layoutX="39.0" layoutY="200.0" />
-      <Text fill="#20597c" layoutX="39.0" layoutY="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lieu">
+      <TextField fx:id="lieuv" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="200.0" />
+      <Text fill="#20597c" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="184.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lieu">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <ComboBox fx:id="combotrait" layoutX="313.0" layoutY="125.0" prefWidth="150.0" />
-      <Text fill="#20597c" layoutX="313.0" layoutY="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traitement" wrappingWidth="101.3828125">
+      <ComboBox fx:id="combotrait" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="125.0" prefWidth="150.0" />
+      <Text fill="#20597c" AnchorPane.leftAnchor="313.0" AnchorPane.topAnchor="103.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traitement" wrappingWidth="101.3828125">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="heurev" layoutX="39.0" layoutY="279.0" />
-      <Text fill="#20597c" layoutX="39.0" layoutY="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure">
+      <TextField fx:id="heurev" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="279.0" />
+      <Text fill="#20597c" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="257.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Button layoutX="275.0" layoutY="222.0" mnemonicParsing="false" onAction="#ajouterv" prefHeight="36.0" prefWidth="128.0" text="Ajouter" />
-      <Button layoutX="411.0" layoutY="222.0" mnemonicParsing="false" onAction="#afficherv" prefHeight="36.0" prefWidth="128.0" text="Afficher" />
+      <Button layoutX="275.0" layoutY="222.0" mnemonicParsing="false" onAction="#ajouterv" prefHeight="36.0" prefWidth="128.0" text="Ajouter" AnchorPane.rightAnchor="197.0" AnchorPane.topAnchor="222.0"/>
+      <Button layoutX="411.0" layoutY="222.0" mnemonicParsing="false" onAction="#afficherv" prefHeight="36.0" prefWidth="128.0" text="Afficher" AnchorPane.rightAnchor="61.0" AnchorPane.topAnchor="222.0"/>
    </children>
 </AnchorPane>
