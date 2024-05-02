@@ -60,7 +60,7 @@ public class Ajoutertraitement {
         Servicetraitement servicetraitement = new Servicetraitement();
         try {
             if (servicetraitement.exists(newTraitement)) {
-                showAlert(Alert.AlertType.ERROR, "Erreur de Duplication", "Un traitement avec les mêmes informations existe déjà.");
+                showAlert(Alert.AlertType.ERROR, "Erreur de Duplication", "Un traitement avec les mêmes informations existe déjà existe .");
                 return false;
             }
         } catch (SQLException e) {
@@ -69,6 +69,14 @@ public class Ajoutertraitement {
         }
         return true;
     }
+
+    private void showInformationAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
 
     @FXML
     void afficherbtn(ActionEvent event) {

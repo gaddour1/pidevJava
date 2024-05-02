@@ -50,6 +50,7 @@ public class Statistiques {
         pieChart.getData().clear();
         pieChart.getData().addAll(pieChartData);
     }
+
     }
 
 

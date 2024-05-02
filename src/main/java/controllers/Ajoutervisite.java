@@ -16,9 +16,14 @@ import services.Servicetraitement;
 import services.Servicevisite;
 import tests.HelloApplication;
 import controllers.* ;
+import utils.SchedulerService;
+
 import java.io.IOException;
 import java.sql.SQLException;
+import java.time.Duration;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 
@@ -38,6 +43,8 @@ public class Ajoutervisite {
     private traitement selectedTraitement;
     private Servicevisite servicevisite;
     private visite visiteToUpdate;
+    @FXML
+    private TextField email;
 
 
     public Ajoutervisite() {
@@ -80,11 +87,34 @@ public class Ajoutervisite {
         visite newVisite = new visite(dateString, lieu, heure, selectedTraitement);
         try {
             servicevisite.ajouter(newVisite);
-            showAlert("SUCCÈS", "Visite ajoutée avec succès");
+            showInformationAlert("SUCCÈS", "Visite ajoutée avec succès");
         } catch (SQLException e) {
             showAlert("Erreur", "Échec de l'ajout de la visite : " + e.getMessage());
+
         }
+        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HH:mm");
+        LocalTime time = LocalTime.parse(heurev.getText(), timeFormatter);
+        LocalDateTime dateTime = LocalDateTime.of(datefx.getValue(), time);
+        long delay = Duration.between(LocalDateTime.now(), dateTime.minusHours(2)).toMillis();
+
+        if (delay > 0) {
+            new SchedulerService().scheduleEmailReminder(
+                    email.getText(),
+                    "Rappel de visite",
+                    "Vous avez un rendez-vous prévu à " + heurev.getText() + " le " + datefx.getValue().toString(),
+                    delay
+            );}
+        else {
+            showAlert("Erreur", "L'heure de rappel est déjà passée.");}
     }
+
+    private void showInformationAlert(String title, String content) {
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle(title);
+        alert.setContentText(content);
+        alert.showAndWait();
+    }
+
     @FXML
     void afficherv(ActionEvent event) {
         FXMLLoader fxmlLoader = new FXMLLoader(HelloApplication.class.getResource("/projetjava/Affichervisite.fxml"));
