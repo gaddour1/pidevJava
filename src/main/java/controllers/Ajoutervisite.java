@@ -16,6 +16,7 @@ import services.Servicetraitement;
 import services.Servicevisite;
 import tests.HelloApplication;
 import controllers.* ;
+import utils.PDFGenerator;
 import utils.SchedulerService;
 
 import java.io.IOException;
@@ -53,6 +54,8 @@ public class Ajoutervisite {
     }
     @FXML
     void ajouterv(ActionEvent event) throws SQLException {
+        boolean nouvelleVisiteAjoutée = false;
+
         traitement selectedTraitement = combotrait.getValue();
         if (selectedTraitement == null) {
             showAlert("Erreur", "Veuillez sélectionner un traitement.");
@@ -87,6 +90,8 @@ public class Ajoutervisite {
         visite newVisite = new visite(dateString, lieu, heure, selectedTraitement);
         try {
             servicevisite.ajouter(newVisite);
+            nouvelleVisiteAjoutée = true;
+
             showInformationAlert("SUCCÈS", "Visite ajoutée avec succès");
         } catch (SQLException e) {
             showAlert("Erreur", "Échec de l'ajout de la visite : " + e.getMessage());
@@ -105,8 +110,18 @@ public class Ajoutervisite {
                     delay
             );}
         else {
-            showAlert("Erreur", "L'heure de rappel est déjà passée.");}
-    }
+            showAlert("Erreur", "L'heure de rappel est déjà passée.");
+        }
+
+        if (nouvelleVisiteAjoutée) {
+            try {
+                PDFGenerator.generateVisitReport(newVisite, "C:\\Users\\USER\\Downloads\\visitespdf/visit_report.pdf");
+                showAlert("Succès", "Le rapport PDF a été créé avec succès.");
+            } catch (Exception e) {
+                showAlert("Erreur", "Erreur lors de la génération du rapport PDF : " + e.getMessage());
+            }
+            }
+        }
 
     private void showInformationAlert(String title, String content) {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);

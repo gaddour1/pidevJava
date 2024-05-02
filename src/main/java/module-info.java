@@ -7,6 +7,9 @@ module projet1 {
     requires com.dlsc.formsfx;
     requires java.sql;
     requires java.mail;
+    requires io;
+    requires kernel;
+    requires layout;
 
     opens tests to javafx.fxml;
     opens controllers to javafx.fxml; // Open the Controlleur package
