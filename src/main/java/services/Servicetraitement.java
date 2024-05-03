@@ -160,4 +160,23 @@ public class Servicetraitement implements IService<traitement> {
             }
         }
     }
+    public List<traitement> findTreatmentsByKeywords(String keywords) throws SQLException {
+        List<traitement> treatments = new ArrayList<>();
+        String sql = "SELECT * FROM traitement WHERE notes LIKE ?";
+        try (PreparedStatement stmt = connection.prepareStatement(sql)) {
+            stmt.setString(1, "%" + keywords + "%");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                treatments.add(new traitement(
+                        rs.getInt("id"),
+                        rs.getString("nom"),
+                        rs.getInt("duree"),
+                        rs.getString("posologie"),
+                        rs.getString("notes"),
+                        rs.getInt("cout")
+                ));
+            }
+        }
+        return treatments;
+    }
 }

@@ -154,7 +154,7 @@ public class Ajoutervisite {
                 double calculatedCost = calculerCoutVisite(latestVisit.getLieu(), latestVisit.getTraitement().getCout());
                 String pdfPath = "C:\\Users\\USER\\Downloads\\visitespdf/visit_report_" + latestVisit.getId() + ".pdf";
                 PDFGenerator.generateVisitReport(latestVisit, calculatedCost, pdfPath);
-                showAlert("Succès", "PDF généré avec succès à : " + pdfPath);
+                showInformationAlert("Succès", "PDF généré avec succès  ");
             } else {
                 showAlert("Information", "Aucune visite récente trouvée.");
             }
