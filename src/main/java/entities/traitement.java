@@ -12,6 +12,14 @@ public class traitement {
     private int cout;
     private List<visite> visites;
 
+    public traitement(int id, String nom, int cout) {
+        this.id = id;
+        this.nom = nom;
+
+        this.cout = cout;
+
+    }
+
     public int getId() {
         return id;
     }

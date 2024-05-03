@@ -159,4 +159,29 @@ public class Servicevisite implements IService<visite>{
             System.out.println("Error accessing the database: " + e.getMessage());
         }
         return data;
-    }}
+    }
+    public visite getDerniereVisite() throws SQLException {
+        String query = "SELECT v.id, v.date, v.lieu, v.heure, t.id AS traitement_id, t.nom AS nom_traitement, t.cout AS cout_traitement " +
+                "FROM visite v JOIN traitement t ON v.traitement_id = t.id " +
+                "ORDER BY v.id DESC LIMIT 1";
+        try (Statement stmt = connection.createStatement();
+             ResultSet rs = stmt.executeQuery(query)) {
+            if (rs.next()) {
+                traitement trait = new traitement(
+                        rs.getInt("traitement_id"),
+                        rs.getString("nom_traitement"),
+                        rs.getInt("cout_traitement")
+                );
+                return new visite(
+                        rs.getInt("id"),
+                        rs.getString("date"),
+                        rs.getString("lieu"),
+                        rs.getString("heure"),
+                        trait
+                );
+            }
+        }
+        return null; // Retourner null si aucune visite n'est trouvée
+    }
+
+}

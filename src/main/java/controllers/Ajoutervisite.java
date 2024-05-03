@@ -27,6 +27,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 public class Ajoutervisite {
     @FXML
@@ -37,6 +38,9 @@ public class Ajoutervisite {
 
     @FXML
     private TextField heurev;
+    @FXML
+    private TextField cout;
+
 
     @FXML
     private TextField lieuv;
@@ -46,6 +50,13 @@ public class Ajoutervisite {
     private visite visiteToUpdate;
     @FXML
     private TextField email;
+    private Set<String> regionsTunisie = Set.of(
+            "ariana", "beja", "ben arous", "bizerte", "gabes", "gafsa",
+            "jendouba", "kairouan", "kasserine", "kebili", "kef", "mahdia",
+            "manouba", "medenine", "monastir", "nabeul", "sfax", "sidi bouzid",
+            "siliana", "sousse", "tataouine", "tozeur", "tunis", "zaghouan"
+    );
+
 
 
     public Ajoutervisite() {
@@ -75,9 +86,9 @@ public class Ajoutervisite {
             return;
         }
 
-        String lieu = lieuv.getText().trim();
-        if (!lieu.toLowerCase().contains("tunis")) {
-            showAlert("Erreur", "Le lieu doit être en Tunisie.");
+        String lieu = lieuv.getText().trim().toLowerCase();
+        if (!regionsTunisie.contains(lieu)) {
+            showAlert("Erreur", "Le lieu doit être une région valide en Tunisie.");
             return;
         }
 
@@ -112,15 +123,21 @@ public class Ajoutervisite {
         else {
             showAlert("Erreur", "L'heure de rappel est déjà passée.");
         }
-
+/*
         if (nouvelleVisiteAjoutée) {
             try {
-                PDFGenerator.generateVisitReport(newVisite, "C:\\Users\\USER\\Downloads\\visitespdf/visit_report.pdf");
+                visite derniereVisite = servicevisite.getDerniereVisite();
+                double cout = 0.0;
+                if (derniereVisite != null) {
+                    cout = calculerCoutVisite(derniereVisite.getLieu(), derniereVisite.getTraitement().getCout());
+                }
+                PDFGenerator.generateVisitReport(newVisite, cout, "C:\\Users\\USER\\Downloads\\visitespdf/visit_report.pdf");
                 showAlert("Succès", "Le rapport PDF a été créé avec succès.");
             } catch (Exception e) {
                 showAlert("Erreur", "Erreur lors de la génération du rapport PDF : " + e.getMessage());
             }
-            }
+            }*/
+
         }
 
     private void showInformationAlert(String title, String content) {
@@ -128,6 +145,24 @@ public class Ajoutervisite {
         alert.setTitle(title);
         alert.setContentText(content);
         alert.showAndWait();
+    }
+    @FXML
+    void handleGeneratePdf(ActionEvent event) {
+        try {
+            visite latestVisit = servicevisite.getDerniereVisite();
+            if (latestVisit != null) {
+                double calculatedCost = calculerCoutVisite(latestVisit.getLieu(), latestVisit.getTraitement().getCout());
+                String pdfPath = "C:\\Users\\USER\\Downloads\\visitespdf/visit_report_" + latestVisit.getId() + ".pdf";
+                PDFGenerator.generateVisitReport(latestVisit, calculatedCost, pdfPath);
+                showAlert("Succès", "PDF généré avec succès à : " + pdfPath);
+            } else {
+                showAlert("Information", "Aucune visite récente trouvée.");
+            }
+        } catch (Exception e) {
+            showAlert("Erreur", "Erreur lors de la génération du PDF : " + e.getMessage());
+        }
+
+
     }
 
     @FXML
@@ -156,8 +191,20 @@ public class Ajoutervisite {
         @FXML
     private void initialize() {
         loadTraitementData();
-    }
+            combotrait.valueProperty().addListener((obs, oldVal, newVal) -> calculateAndDisplayCost());
+            lieuv.textProperty().addListener((obs, oldVal, newVal) -> calculateAndDisplayCost());
 
+        }
+    private void calculateAndDisplayCost() {
+        if (combotrait.getValue() != null && lieuv.getText() != null && !lieuv.getText().isEmpty()) {
+            try {
+                double coutCalculé = calculerCoutVisite(lieuv.getText(), combotrait.getValue().getCout());
+                cout.setText(String.format("%.2f TND", coutCalculé));
+            } catch (Exception e) {
+                cout.setText("Erreur de calcul");
+                showAlert("Erreur", "Erreur lors du calcul du coût : " + e.getMessage());
+            }
+        }}
 
     private void loadTraitementData() {
         servicetraitement = new Servicetraitement();  // S'assurer que ceci est bien initialisé
@@ -201,5 +248,59 @@ public class Ajoutervisite {
         combotrait.getSelectionModel().select(visite.getTraitement());
 
     }
+    public void loadLatestVisitDetails() {
+        try {
+            visite derniereVisite = servicevisite.getDerniereVisite();
+            if (derniereVisite != null) {
+                double coutcalculé = calculerCoutVisite(derniereVisite.getLieu(), derniereVisite.getTraitement().getCout());
+                cout.setText(String.format("%.2f", coutcalculé) + " TND");
+            } else {
+                cout.setText("Pas de visites précédentes.");
+            }
+        } catch (SQLException e) {
+            showAlert("Erreur", "Erreur lors de la récupération des données : " + e.getMessage());
+        }
+    }
+
+    private double calculerCoutVisite(String lieu, double coutTraitement) {
+        double basePrice = coutTraitement; // Utiliser le coût du traitement comme prix de base
+        double distanceFactor = 1.0; // Multiplicateur par défaut
+
+        // Convertir le nom du lieu en minuscules pour la comparaison
+
+
+        switch (lieu.toLowerCase()) {
+            case "ariana": distanceFactor = 1.0; break;
+            case "beja": distanceFactor = 1.4; break;
+            case "ben arous": distanceFactor = 1.1; break;
+            case "bizerte": distanceFactor = 1.5; break;
+            case "gabes": distanceFactor = 5.1; break;
+            case "gafsa": distanceFactor = 5; break;
+            case "jendouba": distanceFactor = 1.8; break;
+            case "kairouan": distanceFactor = 1.7; break;
+            case "kasserine": distanceFactor = 2.3; break;
+            case "kebili": distanceFactor = 6; break;
+            case "kef": distanceFactor = 1.6; break;
+            case "mahdia": distanceFactor = 2; break;
+            case "manouba": distanceFactor = 1.0; break;
+            case "medenine": distanceFactor = 6.5; break;
+            case "monastir": distanceFactor = 3; break;
+            case "nabeul": distanceFactor = 1.2; break;
+            case "sfax": distanceFactor = 3.7; break;
+            case "sidi bouzid": distanceFactor = 4.8; break;
+            case "siliana": distanceFactor = 1.7; break;
+            case "sousse": distanceFactor = 3; break;
+            case "tataouine": distanceFactor = 3.2; break;
+            case "tozeur": distanceFactor = 5.2; break;
+            case "tunis": distanceFactor = 1.0; break;
+            case "zaghouan": distanceFactor = 1.3; break;
+            default: distanceFactor = 1.5; // Si la région n'est pas reconnue, appliquer un multiplicateur moyen
+        }
+
+        return basePrice * distanceFactor;
+    }
+
+
+
 }
 

@@ -15,37 +15,44 @@
             <Font name="Andalus" size="31.0" />
          </font>
       </Text>
-      <DatePicker fx:id="datefx" layoutX="39.0" layoutY="113.0" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="113.0" />
-      <Text fill="#3761ae" layoutX="39.0" layoutY="98.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de visite:" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="83.515625">
+      <DatePicker fx:id="datefx" layoutX="16.0" layoutY="101.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="101.0" />
+      <Text fill="#3761ae" layoutX="31.0" layoutY="87.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Date de visite:" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="72.515625">
          <font>
             <Font name="Arial" size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="lieuv" layoutX="289.0" layoutY="113.0" AnchorPane.leftAnchor="289.0" AnchorPane.topAnchor="113.0" />
-      <Text fill="#20597c" layoutX="300.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lieu" AnchorPane.leftAnchor="300.0" AnchorPane.topAnchor="81.734375">
+      <TextField fx:id="lieuv" layoutX="262.0" layoutY="101.0" AnchorPane.leftAnchor="262.0" AnchorPane.topAnchor="101.0" />
+      <Text fill="#20597c" layoutX="285.0" layoutY="88.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Lieu" AnchorPane.leftAnchor="285.0" AnchorPane.topAnchor="70.734375">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <ComboBox fx:id="combotrait" layoutX="261.0" layoutY="204.0" prefWidth="150.0" AnchorPane.leftAnchor="261.0" AnchorPane.topAnchor="204.0" />
-      <Text fill="#20597c" layoutX="249.0" layoutY="181.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traitement" wrappingWidth="101.3828125" AnchorPane.leftAnchor="249.0" AnchorPane.topAnchor="163.734375">
+      <ComboBox fx:id="combotrait" layoutX="16.0" layoutY="175.0" prefWidth="150.0" AnchorPane.leftAnchor="16.0" AnchorPane.topAnchor="175.0" />
+      <Text fill="#20597c" layoutX="31.0" layoutY="163.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Traitement" wrappingWidth="101.3828125" AnchorPane.leftAnchor="31.0" AnchorPane.topAnchor="145.734375">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <TextField fx:id="heurev" layoutX="40.0" layoutY="204.0" AnchorPane.leftAnchor="40.0" AnchorPane.topAnchor="204.0" />
-      <Text fill="#20597c" layoutX="39.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure" AnchorPane.leftAnchor="39.0" AnchorPane.topAnchor="164.734375">
+      <TextField fx:id="heurev" layoutX="438.0" layoutY="101.0" AnchorPane.leftAnchor="438.0" AnchorPane.topAnchor="101.0" />
+      <Text fill="#20597c" layoutX="453.0" layoutY="89.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Heure" AnchorPane.leftAnchor="453.0" AnchorPane.topAnchor="71.734375">
          <font>
             <Font size="16.0" />
          </font>
       </Text>
-      <Button layoutX="438.0" layoutY="244.0" mnemonicParsing="false" onAction="#ajouterv" prefHeight="36.0" prefWidth="128.0" text="Ajouter" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="244.0" />
-      <Button layoutX="438.0" layoutY="314.0" mnemonicParsing="false" onAction="#afficherv" prefHeight="36.0" prefWidth="128.0" text="Afficher" AnchorPane.rightAnchor="34.0" AnchorPane.topAnchor="314.0" />
+      <Button layoutX="449.0" layoutY="170.0" mnemonicParsing="false" onAction="#ajouterv" prefHeight="36.0" prefWidth="128.0" text="Ajouter" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="170.0" />
+      <Button layoutX="449.0" layoutY="226.0" mnemonicParsing="false" onAction="#afficherv" prefHeight="36.0" prefWidth="128.0" text="Afficher" AnchorPane.rightAnchor="23.0" AnchorPane.topAnchor="226.0" />
       <TextField fx:id="email" layoutX="23.0" layoutY="308.0" prefHeight="36.0" prefWidth="229.0" />
       <Text fill="#3744b5" layoutX="16.0" layoutY="280.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Ajouter votre email pour recevoir des rappels ">
          <font>
             <Font name="Andalus" size="16.0" />
          </font>
       </Text>
+      <TextField fx:id="cout" layoutX="272.0" layoutY="175.0" />
+      <Text fill="#2f3986" layoutX="288.0" layoutY="161.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Cout de votre visite ">
+         <font>
+            <Font name="Andalus" size="12.0" />
+         </font>
+      </Text>
+      <Button layoutX="449.0" layoutY="290.0" mnemonicParsing="false" onAction="#handleGeneratePdf" prefHeight="36.0" prefWidth="128.0" text="Telecharger en PDF" />
    </children>
 </AnchorPane>

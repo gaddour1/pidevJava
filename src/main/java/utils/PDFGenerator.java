@@ -1,6 +1,7 @@
 package utils;
 
 import com.itextpdf.io.font.constants.StandardFonts;
+import com.itextpdf.kernel.font.PdfFont;
 import com.itextpdf.kernel.font.PdfFontFactory;
 import com.itextpdf.kernel.pdf.PdfDocument;
 import com.itextpdf.kernel.pdf.PdfWriter;
@@ -11,32 +12,60 @@ import entities.visite;
 
 public class PDFGenerator {
 
-    public static void generateVisitReport(visite visit, String dest) throws Exception {
+    public static void generateVisitReport(visite visit, double cout ,String dest) throws Exception {
         PdfWriter writer = new PdfWriter(dest);
         PdfDocument pdf = new PdfDocument(writer);
         Document document = new Document(pdf);
 
+        PdfFont boldFont = PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD);
+        PdfFont normalFont = PdfFontFactory.createFont(StandardFonts.HELVETICA);
+
+        // Ajout de contenu au document
         document.add(new Paragraph("Rapport de Visite")
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA_BOLD))
+                .setFont(boldFont)
                 .setFontSize(18)
                 .setTextAlignment(TextAlignment.CENTER));
 
         document.add(new Paragraph("Date de visite: " + visit.getDate())
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(12));
+                .setFont(normalFont)
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.CENTER));
 
         document.add(new Paragraph("Heure de visite: " + visit.getHeure())
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(12));
+                .setFont(normalFont)
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.CENTER));
 
         document.add(new Paragraph("Lieu de visite: " + visit.getLieu())
-                .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(12));
+                .setFont(normalFont)
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.CENTER));
 
         document.add(new Paragraph("Traitement: " + visit.getTraitement().getNom())
+                .setFont(normalFont)
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.CENTER));
+        document.add(new Paragraph("Coût de la visite: " + String.format("%.2f TND", cout))
                 .setFont(PdfFontFactory.createFont(StandardFonts.HELVETICA))
-                .setFontSize(12));
+                .setFontSize(12)
+                 .setTextAlignment(TextAlignment.CENTER));
 
+        // Espace pour la signature
+        document.add(new Paragraph("\nSignature de l'infirmier:")
+                .setFont(normalFont)
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.RIGHT));
+
+        // Ajout d'une ligne horizontale pour la signature
+        document.add(new Paragraph("_____________________________________________")
+                .setTextAlignment(TextAlignment.RIGHT));
+
+        document.add(new Paragraph("Nom de l'infirmier:")
+                .setFont(normalFont)
+                .setFontSize(12)
+                .setTextAlignment(TextAlignment.RIGHT));
+
+        // Fermeture du document
         document.close();
     }
 }
