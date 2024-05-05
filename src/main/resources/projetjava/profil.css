@@ -1,0 +1,11 @@
+.primary-color {
+    -fx-background-color: #00CED1; /* Bleu turquoise */
+}
+
+.secondary-color {
+    -fx-background-color: #02f0ff; /* Turquoise */
+}
+
+
+.mouse-moved:hover{
+    -fx-background-color: #E4E4E4; }

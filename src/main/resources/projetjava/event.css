@@ -1,0 +1,89 @@
+.white-background {
+    -fx-background-color: #fff
+}
+
+    . transparent{
+        -fx-background-color: rgba(0,0,0,0);
+
+    }
+
+    .round-layout{
+        -fx-border-radius: 50;
+        -fx-border-color: #D7D7D7; }
+
+.mouse-moved:hover{
+    -fx-background-color: #E4E4E4; }
+
+/* cards.css */
+
+/* Title Styles */
+.title-label {
+    -fx-font-family: "Arial";
+    -fx-font-size: 24px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #333333;
+    -fx-padding: 10px; /* Add padding for spacing */
+    -fx-background-color: #f0f0f0; /* Background color */
+    -fx-border-radius: 5px; /* Rounded corners */
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1); /* Shadow effect */
+}
+
+/* Event Card Styles */
+.event-card {
+    -fx-background-color: #ffffff;
+    -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
+    -fx-padding: 10px;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 5, 0, 0, 1);
+    -fx-cursor: hand;
+    transition: opacity 0.3s;
+}
+
+.event-card-hover {
+    -fx-background-color: #cccccc; /* Change to darker color */
+}
+
+/* Styles for event labels and buttons */
+.event-title {
+    -fx-font-weight: bold;
+    -fx-font-size: 14px;
+}
+
+.event-details {
+    -fx-font-size: 12px;
+    -fx-text-fill: #666666;
+}
+
+.event-button {
+    -fx-background-color: #099da4; /* Green */
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-padding: 5px 10px;
+    -fx-border-radius: 5px;
+    -fx-cursor: hand;
+}
+
+.event-button:hover {
+    -fx-background-color: #45a049; /* Darker green */
+}
+
+.event-card-red {
+    -fx-background-color: #FFC0CB; /* Light pink */
+}
+
+.event-card-blue {
+    -fx-background-color: #ADD8E6; /* Light blue */
+}
+
+.event-card-green {
+    -fx-background-color: #90EE90; /* Light green */
+}
+
+/* Style for event cards with grey background */
+.event-card-grey {
+    -fx-background-color: #f0f0f0; /* Grey background color */
+    -fx-background-radius: 10; /* Rounded corners */
+    -fx-padding: 10px; /* Padding around the card */
+    -fx-border-width: 1px; /* Border width */
+    -fx-border-color: #ccc; /* Border color */
+}

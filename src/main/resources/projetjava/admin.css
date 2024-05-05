@@ -1,0 +1,35 @@
+.nav-form {
+    -fx-background-color: #039696;
+}
+
+
+.nav-btn {
+    -fx-background-color: transparent;
+    -fx-cursor: hand;
+    -fx-font-size: 14px;
+    -fx-text-fill: #fff;
+    -fx-font-family: Arial;
+    -fx-alignment: CENTER-LEFT;
+}
+.white-bg{
+    -fx-background-color: #fff;
+    -fx-background-radius: 8px;
+}
+
+/* Your CSS file */
+.card-container {
+    -fx-background-color: linear-gradient(to bottom right, #40E0D0, #066e73);
+}
+
+/* Your CSS file */
+/* Your CSS file */
+.card-container {
+    -fx-background-color: linear-gradient(to bottom right, #40E0D0, #00CED1);
+    -fx-effect: dropshadow(gaussian, #888888, 10, 0.5, 0, 0);
+}
+/* Your CSS file */
+.grey-bg{
+    -fx-background-color: #d0d0d0;
+    -fx-background-radius: 8px;
+}
+

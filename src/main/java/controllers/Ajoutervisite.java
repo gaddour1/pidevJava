@@ -1,6 +1,6 @@
 package controllers;
 
-import entities.traitement;
+import  entities.traitement;
 import entities.visite;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
